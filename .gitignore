@@ -60,3 +60,4 @@ local.properties
 .loadpath
 #properties
 *.properties
+*.p12
