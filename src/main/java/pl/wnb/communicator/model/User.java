@@ -10,22 +10,18 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @Column(name = "user_id", unique = true, nullable = false)
     private long user_id;
-    @Column(nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+    @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)
     private String password;
     @Column(nullable = false, columnDefinition = "boolean default TRUE")
     private boolean active;
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-
-        this.active = true;
-    }
-    private User(){}
+    @Column(name = "public_key", unique = true)
+    private byte[] publicKey;
 
     public long getUser_id() {
         return user_id;
@@ -55,8 +51,33 @@ public class User {
         this.roles = roles;
     }
 
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.active = true;
+        this.publicKey = null;
+    }
+
+    private User() {
+        this.active = true;
+        this.publicKey = null;
+    }
+
     public String getUsername() {
         return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public byte[] getPublicKey() {
+        return publicKey;
     }
 
     public String getPassword() {
@@ -65,6 +86,18 @@ public class User {
 
     public boolean isActive() {
         return active;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", active=" + active +
+                ", roles=" + roles +
+                '}';
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
