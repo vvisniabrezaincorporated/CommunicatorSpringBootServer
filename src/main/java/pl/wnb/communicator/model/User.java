@@ -10,17 +10,17 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @Column(name = "user_id", unique = true, nullable = false)
     private long user_id;
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)
     private String password;
     @Column(nullable = false, columnDefinition = "boolean default TRUE")
     private boolean active;
-    @Column(name = "public_key")
+    @Column(name = "public_key", unique = true)
     private byte[] publicKey;
 
     public long getUser_id() {
@@ -58,7 +58,11 @@ public class User {
         this.active = true;
         this.publicKey = null;
     }
-    private User(){}
+
+    private User() {
+        this.active = true;
+        this.publicKey = null;
+    }
 
     public String getUsername() {
         return username;

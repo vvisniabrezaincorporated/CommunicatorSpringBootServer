@@ -64,10 +64,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable().cors().and()
-                    .authorizeRequests().antMatchers("/android/user/create").permitAll()
+                    .authorizeRequests().antMatchers("/register").permitAll()
                     .and().authorizeRequests()
 
-                    .antMatchers("/android/**").hasRole("ADMIN")
+                    .antMatchers("/android/**").hasRole("ADMIN").anyRequest().authenticated()
 
                     .and()
                     .formLogin().successHandler(customSuccessHandler())
@@ -78,7 +78,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/api/**").hasRole("ADMIN").and()
+        http
+                .authorizeRequests().antMatchers("/api/**").hasRole("ADMIN").anyRequest().authenticated().and()
                 .formLogin().loginPage("/customLogin");
     }
 

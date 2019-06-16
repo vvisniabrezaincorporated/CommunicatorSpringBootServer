@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = {"/android/", "/api/"})
 public class UserController {
 
     @Autowired
@@ -24,12 +23,9 @@ public class UserController {
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
-    @GetMapping("/status/check")
-    public String status()
-    {
-        return "working";
-    }
-    @PostMapping("user/register")
+
+
+    @PostMapping("/register")
     public ResponseEntity register(@RequestBody User user) {
         User userExists = userRepository.findByUsername(user.getUsername());
         if (userExists != null) {
