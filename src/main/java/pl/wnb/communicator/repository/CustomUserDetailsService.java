@@ -1,4 +1,4 @@
-package pl.wnb.communicator.service;
+package pl.wnb.communicator.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import pl.wnb.communicator.model.Role;
 import pl.wnb.communicator.model.User;
 import pl.wnb.communicator.repository.UserRepository;
 
@@ -30,19 +29,18 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(), getAuthorities(user.getRoles()));
+                user.getPassword(), getAuthorities());
     }
 
-    private Set<GrantedAuthority> getAuthorities(Set<Role> roles) {
+    private Set<GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
-        }
+
         return authorities;
     }
 
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setActive(true);
         userRepository.save(user);
 
     }

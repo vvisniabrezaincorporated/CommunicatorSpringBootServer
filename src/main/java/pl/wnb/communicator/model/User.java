@@ -1,6 +1,8 @@
 package pl.wnb.communicator.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class User {
     @Column(name = "user_id", unique = true, nullable = false)
     private long user_id;
     @Column(name = "email", unique = true, nullable = false)
+    @Email
     private String email;
     @Column(nullable = false, unique = true)
     private String username;
@@ -22,6 +25,11 @@ public class User {
     private boolean active;
     @Column(name = "public_key", unique = true)
     private byte[] publicKey;
+
+    @Column(name = "key_email")
+    @Email
+    private String keyEmail;
+
 
     public long getUser_id() {
         return user_id;
@@ -43,12 +51,9 @@ public class User {
         this.active = active;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setPublicKey(byte[] publicKey) {
+        this.publicKey = publicKey;
     }
 
     public User(String username, String password, String email) {
@@ -57,11 +62,20 @@ public class User {
         this.email = email;
         this.active = true;
         this.publicKey = null;
+        this.publicKey = null;
     }
 
     private User() {
         this.active = true;
         this.publicKey = null;
+    }
+
+    public String getKeyEmail() {
+        return keyEmail;
+    }
+
+    public void setKeyEmail(String keyEmail) {
+        this.keyEmail = keyEmail;
     }
 
     public String getUsername() {
@@ -96,15 +110,8 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", active=" + active +
-                ", roles=" + roles +
+                ", publicKey=" + Arrays.toString(publicKey) +
+                ", keyEmail='" + keyEmail + '\'' +
                 '}';
     }
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "User_Roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
-    private Set<Role> roles = new HashSet<>();
-
-
 }

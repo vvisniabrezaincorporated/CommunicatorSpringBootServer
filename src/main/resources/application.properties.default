@@ -1,28 +1,33 @@
 ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
-spring.datasource.url =
-spring.datasource.username =
-spring.datasource.password =
+spring.datasource.url = 
+spring.datasource.username = 
+spring.datasource.password = 
 
 spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
 
 # The SQL dialect makes Hibernate generate better SQL for the chosen database
-spring.jpa.properties.hibernate.dialect =
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQL92Dialect
 
 # Hibernate ddl auto (create, create-drop, validate, update)
 spring.jpa.hibernate.ddl-auto = update
 
 # The format used for the keystore. It could be set to JKS in case it is a JKS file
-server.ssl.key-store-type=
+server.ssl.key-store-type=PKCS12
 # The path to the keystore containing the certificate
-server.ssl.key-store=classpath:
+server.ssl.key-store=classpath:keystore/wnb.p12
 # The password used to generate the certificate
-server.ssl.key-store-password=
+server.ssl.key-store-password=zbyszko3majmy
 
 logging.level.org.springframework.web=DEBUG
 #security.require-ssl=true
 
 #trust store location
-trust.store=
+trust.store=classpath:keystore/wnb.p12
 #trust store password
-trust.store.password=
-server.port:
+trust.store.password=zbyszko3majmy
+server.port: 8443
+
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+spring.thymeleaf.cache=false
+server.error.include-stacktrace=always

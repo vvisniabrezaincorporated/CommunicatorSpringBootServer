@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- https://cdnjs.com/libraries/sockjs-client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <!-- https://cdnjs.com/libraries/stomp.js/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/chat.css}">
+
+
+</head>
+
+<body>
+
+<div class="container" style="height: 90vh; width: 90vh;">
+
+    <div class="chat" id="chat" style="overflow-y: scroll; height:85vh; width:80vh">
+    </div>
+
+    <div class="onlineList" id="onlineList" style="overflow-y: scroll; height:85vh; width:20vh">
+    </div>
+</div>
+
+<br class="button-container"> <input type="text" name="send" id="messageText"> <input type="button" name="send" class="btn btn-success"
+                                                                                      onclick="messageContentScript();" value="Send">
+<input type="button" name="sendKey" class="btn btn-info" onclick="sendKey();"
+       value="Send public key from extension to db!"></br>
+
+<a href="#" th:href="@{/logout}">Log Out</a>
+
+
+</body>
+<script type="text/javascript" th:src="@{/js/connectToChat.js}"></script>
+<script type="text/javascript" th:src="@{/js/updateOnlineList.js}"></script>
+<script type="text/javascript" th:src="@{/js/chat.js}"></script>
+<script type="text/javascript" th:src="@{/js/key.js}"></script>
+<script type="text/javascript" th:src="@{/js/chooseUser.js}"></script>
+<script type="text/javascript" th:src="@{/js/extension.js}"></script>
+<script type="text/javascript" th:src="@{/js/token.js}"></script>
+</html>

@@ -45,4 +45,5 @@ public class Communicator {
         connector.setRedirectPort(8443);
         return connector;
     }
+
 }

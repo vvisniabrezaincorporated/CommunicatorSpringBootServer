@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>Login page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<form th:action="@{/login}" method="post">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Sign in</h1>
+                <p th:if="${loginError}" class="error">Wrong user or password</p>
+    <label for="username" class="input-group-addon">Username</label>:
+    <input type="text" id="username"  class="form-control" name="username" autofocus="autofocus" /> <br />
+    <label for="password" class="input-group-addon">Password</label>:
+    <input type="password" class="form-control" id="password" name="password" /> <br />
+    <input type="submit" class="btn btn-block btn-primary btn-default" value="Log in" />
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
+

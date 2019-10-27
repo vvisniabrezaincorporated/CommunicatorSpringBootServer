@@ -1,0 +1,63 @@
+body {
+    margin-left: 50vh;
+    padding: 0 20px;
+}
+
+.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    display: flex;
+
+}
+
+.button-container{
+    margin-bottom: 15vh;
+}
+
+.keyButton{
+    margin-left: 95vh;
+
+}
+.chat {
+
+    display: inline-block;
+}
+.sendKey{
+    margin-left: 30px;
+}
+.onlineList {
+
+    display: inline-block;
+    /*   vertical-align:top;*/
+}
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+.lighter{
+    border-color: #d3dd;
+    background-color: #ddd;
+}
+.user{
+    margin-top: 5px;
+    border-color: green;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: darkgrey;
+}
+
+
+
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+}
